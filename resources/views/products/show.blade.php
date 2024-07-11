@@ -74,7 +74,7 @@
                                         <td colspan="4"><b style="padding-right:55% ">Total</b>  ${{ Cart::total() }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" ><a href="/comprar" class="btn btn-outline-info" >Comprar ahora</a></td>
+                                        <td colspan="4" ><a href="/comprar" class="btn btn-success" >Comprar ahora</a></td>
                                     </tr>
 
                                 </tfoot>

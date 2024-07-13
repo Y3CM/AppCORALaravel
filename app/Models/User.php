@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\View\View;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -80,5 +82,25 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class, 'author', 'number_document');
+    }
+
+   /*  public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id_user', 'number_document');
+    } */
+
+    public function adminlte_image()
+    {
+        return 'https://api.multiavatar.com/BinxBono.png';
+    }
+
+    public function adminlte_desc()
+    {
+        return  'Admin';
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'profile';
     }
 }

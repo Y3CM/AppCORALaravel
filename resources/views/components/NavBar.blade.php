@@ -36,7 +36,7 @@
       @auth
       @if (Auth::user()->rol == 'admin')
    <li class="nav-item">
-    <a href="{{ route('dashboard')}}" class="nav-link ">Dashboard</a>
+    <a href="{{ route('admin.home')}}" class="nav-link ">Dashboard</a>
    </li>
     @endif
           @else

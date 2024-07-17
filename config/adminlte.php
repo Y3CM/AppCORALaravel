@@ -325,9 +325,13 @@ return [
         ],
         [
             'text' => 'pages',
-            'url' => 'admin/pages',
+            'submenu' => [
+                            ['text' => 'welcome',
+                            'url' => '/',
+                            'icon' => 'fas fa-fw fa-file',]
+                         ],
             'icon' => 'far fa-fw fa-file',
-            'label' => 4,
+            'label' => 1,
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],

@@ -40,6 +40,16 @@
   <textarea class="form-control" aria-label="With textarea" name="content">{{$post->content}}</textarea>
 </div>
 
+@if (auth()->user()->rol == 'admin')
+<div class="input-group mb-3">
+    <label for="is_published">Publicar:</label><div class="col-md-4 position-relative">
+    <select name="is_published">
+      <option value="0">pendiente</option>
+      <option value="1">publicar</option>
+    </select>
+    </div>
+@endif
+
 <div class="col-md-3 position-relative">
     <div id="url_input">
         <label for="image_url">URL de la imagen:</label>

@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Categoria::all();
-        return view('categories.create',compact('categories'));
+        return view('admin.categories.create',compact('categories'));
     }
 
     public function store(Request $request)
@@ -68,6 +68,12 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+    }
+
+    public function indexAdmin()
+    {
+        $categories = Categoria::all();
+        return view('admin.categories.index', compact('categories'));   
     }
 }
 

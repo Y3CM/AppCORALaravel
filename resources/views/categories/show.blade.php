@@ -15,9 +15,10 @@
         @foreach ($products as $product)
         @if($category->id == $product->category_id)
         <x-CardProduct :products="$products"/>
+        
         @endif
         @endforeach
-       
+        
         
     </div>
     

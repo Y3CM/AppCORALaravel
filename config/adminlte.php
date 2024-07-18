@@ -1,6 +1,8 @@
 <?php
 
+
 use Symfony\Component\HttpKernel\Profiler\Profile;
+use App\Providers\AdminServiceProvider\boot;
 
 return [
 
@@ -116,7 +118,7 @@ return [
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'images/CORA.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'alt' => 'CORA Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -313,22 +315,71 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
             'text' => 'Dashboard',
             'route' => 'admin.home',
             'icon'=>'fas fa-fw fa-home'
             
         ],
         [
+            'text' => 'Categorias',
+            'submenu' => 
+            [
+                [
+                    'text' => 'Todas',
+                    'route' => 'categorias.index',
+                    'icon' => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'Agregar categoría',
+                    'route' => 'categoria.create',
+                    'icon' => 'fas fa-fw fa-plus',
+                ],
+        
+            ],
+            'icon' => 'fas fa-fw fa-bars',
+        ],
+        [
+            'text' => 'Blog',
+            'submenu' => [
+                            [
+                                'text' => 'Home',
+                                'url' => '/posts',
+                                'icon' => 'fas fa-fw fa-home',
+                            ],
+                            [
+                                'text' => 'Crear post',
+                                'route' => 'posts.create',
+                                'icon_color'=>'blue',
+                                'icon' => 'fas fa-fw fa-plus'
+
+                            ],
+                            [
+                                'text' => 'Publicados',
+                                'route' => 'publicados',
+                                'icon_color'=>'green',
+                                'icon' => 'fas fa-fw fa-check'
+
+                            ],
+                            [
+                                'text' => 'Sin publicar',
+                                'route' => 'verificar.posts',
+                                'label' => '',
+                                'label_color' => 'warning',
+                                'icon_color'=> 'yellow',
+                                'icon' => 'fas fa-fw fa-hourglass'
+
+                            ],
+                         ],
+            'icon' => 'fas fa-fw fa-pen-nib',
+        ],
+        [
             'text' => 'pages',
             'submenu' => [
-                            ['text' => 'welcome',
-                            'url' => '/',
-                            'icon' => 'fas fa-fw fa-file',]
+                            [
+                                'text' => 'welcome',
+                                'url' => '/',
+                                'icon' => 'fas fa-fw fa-file',
+                            ]
                          ],
             'icon' => 'far fa-fw fa-file',
             'label' => 1,

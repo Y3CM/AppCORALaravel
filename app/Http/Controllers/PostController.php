@@ -18,8 +18,10 @@ class PostController extends Controller
         return view('posts.index',compact('posts','categories'));
     }
 
-        public function create(Categoria $categories)
+        public function create()
         {
+            $categories = Categoria::all();
+            
             return view('posts.create',compact( 'categories')); 
         }
 
@@ -48,16 +50,17 @@ class PostController extends Controller
     public function update(Request $request,Post $post)
     {
         
-        //    forma manual de actualizar e insertar datos     
-        $post=Post::find($post);
-            $post->title=$request->title;
-            $post->slug=$request->slug;
-            $post->image=$request->image;
-            $post->resumen=$request->resumen;
-            $post->category=$request->category;
-            $post->content=$request->content;
-            $post->is_published=false;
-            $post->save();
+        
+        $post->update($request->all());
+
+          /*   $post->title=$request->input('title') ;
+            $post->slug=$request->input('slug') ;
+            $post->image=$request->input('image') ;
+            $post->resumen=$request->input('resumen') ;
+            $post->category=$request->input('category') ;
+            $post->content=$request->input('content') ;
+            $post->is_published=$request->input('is_published');
+            $post->save(); */
 
         return redirect()->route('posts.index');
 
@@ -70,4 +73,23 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
+    public function verificarPosts()
+    {
+        $Vposts=Post::orderBy('id', 'desc')->where('is_published', false)->get();
+
+        return view('admin.posts.verificarPosts', compact('Vposts'));
+    }
+
+    public function publicados()
+    {
+        $posts = Post::orderBy('id', 'desc')->where('is_published',true)->get();
+
+        return view('admin.posts.publicados', compact('posts'));
+    }
+
+    public static function countUnverifiedPosts()
+{
+    return Post::where('is_published', false)->count();
+}
 }

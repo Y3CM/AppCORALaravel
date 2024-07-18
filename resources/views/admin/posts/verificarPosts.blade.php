@@ -1,14 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'verificar posts')
 
 @section('content_header')
     
 @stop
 
 @section('content')
-    <p>Bienvenido al panel de administración de CORA </p>
-  
+
+    <h1 style="margin-bottom: 20px; color:rgb(252, 215, 5)">Publicaciones Pendientes</h1>
+    <x-CardPost :posts="$Vposts"/>
 @stop
 
 @section('css')

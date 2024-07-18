@@ -3,12 +3,12 @@
 @section('title','cora | create post')
 
 @section('header')
-    <x-NavBar/>
+   @include('components.NavBar')
     @endsection
 
     @section('content')
-    <div class="container">
-    <a href="{{route('posts.index')}}">volver</a> 
+    <div class="container" style="margin-top: 100px">
+    <a href="{{ url()->previous() }}">volver</a> 
  <h1>Formulario para crear un posts</h1>
  <br><br>
 <form action="{{route('posts.store')}}" method="post">   

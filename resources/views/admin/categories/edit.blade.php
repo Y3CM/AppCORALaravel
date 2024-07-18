@@ -1,10 +1,10 @@
-@extends('layouts.template')
+@extends('adminlte::page')
 
-@section('title','cora | crear categorias')
+@section('title', 'crear categoria')
 
-@section('header')
-@include('components.NavBar')
-@endsection
+@section('content_header')
+    
+@stop
 
 @section('content')
 <div class="container" {{-- style="margin-top: 100px; " --}} >
@@ -32,8 +32,13 @@
     </div>
   </form>
 </div>
-  @endsection
+@stop
 
-  @section('footer')
- <x-Footer/>
-  @endsection
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+@stop

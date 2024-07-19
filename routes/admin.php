@@ -15,7 +15,7 @@ Route::get('/crear',[CategoryController::class,'create'])->name('categoria.creat
 
 Route::get('/categorias',[CategoryController::class,'indexAdmin'])->name('categorias.index');
 
-Route::get('/categorias/{id}/editar',[CategoryController::class,'edit'])->name('categorias.edit');
+Route::get('/categorias/{category}/editar',[CategoryController::class,'editAdmin'])->name('categorias.edit');
 
 
 

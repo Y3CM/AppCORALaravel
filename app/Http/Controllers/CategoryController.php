@@ -61,7 +61,8 @@ class CategoryController extends Controller
 
     public function edit(Categoria $category)
     {
-        return view('categories.edit', compact('category'));
+        $categories = Categoria::all();
+        return view('categories.edit', compact('category','categories'));
     }
 
     public function destroy(Categoria $category)
@@ -74,6 +75,11 @@ class CategoryController extends Controller
     {
         $categories = Categoria::all();
         return view('admin.categories.index', compact('categories'));   
+    }
+
+    public function editAdmin(Categoria $category)
+    {
+        return view('admin.categories.edit', compact('category'));
     }
 }
 

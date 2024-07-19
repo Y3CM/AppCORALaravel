@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="container" {{-- style="margin-top: 100px; " --}} >
+<div class="container" style="margin-top: 100px; " >
     <a class="btn btn-outline-warning" style="margin: 10px" href="{{ url()->previous() }}">volver</a>
     <h1 style="margin-bottom: 10px"><span>Edit</span> categoria</h1>
 <form class="row g-3 needs-validation"  action="{{route('categories.update',$category)}}" method="POST" novalidate >
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="col-12" style="margin-bottom: 10px">
-      <button class="btn btn-outline-success" type="submit">Crear Categoria</button>
+      <button class="btn btn-outline-success" type="submit">Actualizar Categoria</button>
     </div>
   </form>
 </div>

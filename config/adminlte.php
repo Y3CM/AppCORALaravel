@@ -328,11 +328,13 @@ return [
                     'text' => 'Todas',
                     'route' => 'categorias.index',
                     'icon' => 'fas fa-fw fa-list',
+                    'icon_color' => 'purple',
                 ],
                 [
                     'text' => 'Agregar categoría',
                     'route' => 'categoria.create',
                     'icon' => 'fas fa-fw fa-plus',
+                    'icon_color' =>'green',
                 ],
         
             ],
@@ -363,8 +365,8 @@ return [
                             [
                                 'text' => 'Sin publicar',
                                 'route' => 'verificar.posts',
-                                'label' => '',
-                                'label_color' => 'warning',
+                                'label' => 'new',
+                                'label_color' => 'success',
                                 'icon_color'=> 'yellow',
                                 'icon' => 'fas fa-fw fa-hourglass'
 
@@ -382,18 +384,18 @@ return [
                             ]
                          ],
             'icon' => 'far fa-fw fa-file',
-            'label' => 1,
-            'label_color' => 'success',
+            'label' => 'check',
+            'label_color' => 'info',
         ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url' => 'admin/settings',
+            'route' => 'profile.edit',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
-            'url' => 'admin/settings',
+            'route' => 'profile.edit',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [

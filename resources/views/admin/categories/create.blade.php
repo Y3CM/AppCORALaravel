@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<div class="container" style="margin-top: 100px; " >
+<div class="container">
     <h1 style="margin-bottom: 10px"><span>Nueva</span> categoria</h1>
 <form class="row g-3 needs-validation"  action="{{route('categories.store')}}" method="POST" novalidate >
     @csrf

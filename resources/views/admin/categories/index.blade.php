@@ -24,7 +24,7 @@
                <p class="card-text" style="text-align: justify">{{$category->descripcion}}</p>
               @auth
               @if (Auth::user()->rol == 'admin')
-              <p> <a class="btn btn-warning" href="{{route('categories.edit', $category)}}"><i class="fa-solid fa-pen" ></i></a> 
+              <p> <a class="btn btn-warning" href="{{route('categorias.edit', $category)}}"><i class="fa-solid fa-pen" ></i></a> 
                  <form action="{{route('categories.destroy', $category)}}" method="post"> 
                       @method('DELETE')
                       @csrf

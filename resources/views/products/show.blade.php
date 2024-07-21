@@ -86,9 +86,52 @@
                     </div>
                 </div>
             </div>
+
+        <x-inputReview :product="$product" />
+
+            <h3 style="margin-top:15px">Reviews:</h3>
+        @if($product->reviews->isEmpty())
+         <p>no hay reseñas aun.</p>
+        @else
+         @foreach($product->reviews as $review)
+        <div class="card" style="margin:10px">
+            <div class="card-body">
+                <div class="rating">
+                @for($i = 1; $i <= 5; $i++)
+                    @if($i <= $review->rating)
+                        <span class="star filled">&#9733;</span>
+                    @else
+                        <span class="star">&#9734;</span>
+                    @endif
+                @endfor
+            </div>
+                <p class="card-text">{{ $review->review }}</p>
+                <small class="text-muted">by {{ $review->user->name }} on {{ $review->created_at->format('d M Y') }}</small>
+            </div>
+        </div>
+    @endforeach
+@endif
+            
         </div>
   
         @endsection
         @section('footer')
         <x-Footer/>
         @endsection
+
+        <style>
+          .star {
+                font-size: 20px; /* Ajusta el tamaño según tus necesidades */
+                color: springgreen; /* Color para las estrellas llenas */
+                }
+
+            .star.filled 
+                {
+                    color: springgreen; /* Color para las estrellas llenas */
+                }
+
+            .star
+             {
+                color: #ccc; /* Color para las estrellas vacías */
+             }
+        </style>

@@ -61,6 +61,23 @@
             </div>
         </div>
         </div>
+
+<x-InputComents :post="$post"/>
+
+<h3 style="margin-top: 20px">Comentarios:</h3>
+
+<span> Este post tiene {{$post->comments->count()}} comentarios </span>
+
+@foreach($post->comments as $comment)
+    <div class="card" style="margin: 10px">
+        <div class="card-body">
+            <h5 class="card-title">{{ $comment->user->name }}</h5>
+            <p class="card-text">{{ $comment->content }}</p>
+            <small class="text-muted">{{ $comment->created_at->format('d M Y') }}</small>
+        </div> 
+    </div>
+@endforeach
+
     </div>
     @section('footer')
     <x-Footer/>

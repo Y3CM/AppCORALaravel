@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MercadopagoController;
 use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,17 @@ Route::middleware('auth')->group(function () {
     {
         return view('comprar');
     });
+
+
+    Route::post('post/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    // Route::get('post/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+
+    // Route::put('post/{post}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+
+    // Route::delete('post/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    Route::post('product/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 });
 

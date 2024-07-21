@@ -84,11 +84,15 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'author', 'number_document');
     }
 
-   /*  public function comments()
+    public function comments()
     {
         return $this->hasMany(Comment::class, 'id_user', 'number_document');
-    } */
+    }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'id_user', 'number_document');
+    }
     public function adminlte_image()
     {
         return 'https://api.multiavatar.com/BinxBono.png';

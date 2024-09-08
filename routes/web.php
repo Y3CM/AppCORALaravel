@@ -62,15 +62,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('paypal-status',[PaypalController::class, 'getPaymentStatus'])->name( 'paypal-status');
 
-    Route::get('mercadopago-payment', [MercadopagoController::class, 'payWithMercadoPago'])->name('pago-mercadopago');
+    Route::post('/pay-with-mercadopago', [MercadopagoController::class, 'payWithMercadoPago'])->name('pay-with-mercadopago');
 
-    Route::get('mercadopago-status',[MercadopagoController::class, 'getPaymentStatus'])->name( 'mercadopago-status');
-
-    Route::get('prueba-comprar', function()
-    {
-        return view('comprar');
-    });
-
+Route::get('/mercadopago-status', [MercadopagoController::class, 'getPaymentStatus'])->name('mercadopago-status');
 
     Route::post('post/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
@@ -82,9 +76,18 @@ Route::middleware('auth')->group(function () {
 
     Route::post('product/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
-    Route::get('/checkout', function () {
+    Route::get('/paypal', function () {
     return view('pagos.paypal');
-    })->name('checkout');
+    })->name('paypal');
+
+    Route::get('/mercadoPago', function () {
+    return view('pagos.pay_with_mercadopago');
+    })->name('mercadoPago');
+    
+
+    Route::get('/test', function () {
+            return view('test');
+        });
     
 });
 

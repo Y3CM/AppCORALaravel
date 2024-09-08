@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/pay-with-mercadopago', [MercadopagoController::class, 'payWithMercadoPago'])->name('pay-with-mercadopago');
 
-Route::get('/mercadopago-status', [MercadopagoController::class, 'getPaymentStatus'])->name('mercadopago-status');
+    Route::get('/mercadopago-status', [MercadopagoController::class, 'getPaymentStatus'])->name('mercadopago-status');
 
     Route::post('post/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
@@ -80,8 +80,18 @@ Route::get('/mercadopago-status', [MercadopagoController::class, 'getPaymentStat
 
     Route::post('product/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
+    Route::get('/paypal', function () {
+        return view('pagos.paypal');
+        })->name('paypal');
 
-    
+    Route::get('/mercadoPago', function () {
+            return view('pagos.pay_with_mercadopago');
+            })->name('mercadoPago');
+            
+        
+    Route::get('/test', function () {
+                return view('test');
+            });
     
     
 });
@@ -99,4 +109,4 @@ Route::get('/mercadopago/success', function () {
     return 'Pago fallido';
   })->name('payment.failure');
 
-  Route::get('/mercadoPago',[MercadoPago::class,'createPaymentPreference']);
+//   Route::get('/mercadoPago',[MercadoPago::class,'createPaymentPreference']);

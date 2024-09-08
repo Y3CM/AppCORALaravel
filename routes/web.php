@@ -8,7 +8,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MercadoPago;
 use App\Http\Controllers\MercadopagoController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\ReviewController;
 
@@ -25,6 +27,8 @@ use App\Http\Controllers\ReviewController;
 
 Route::get('/', [HomeController::class, 'index']
 );
+
+Route::post('/mercadopago',[MercadoPago::class,'createPaymentPreference']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -82,6 +86,23 @@ Route::middleware('auth')->group(function () {
 
     Route::post('product/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
+
+    
+    
+    
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/order/{id}',[OrderController::class, "show"]);
+
+Route::get('/mercadopago/success', function () {
+    return 'Pago realizado con éxito';
+  })->name('payment.success');
+
+  // Ruta de fallo para MercadoPago
+  Route::get('/mercadopago/failed', function () {
+    return 'Pago fallido';
+  })->name('payment.failure');
+
+  Route::get('/mercadoPago',[MercadoPago::class,'createPaymentPreference']);

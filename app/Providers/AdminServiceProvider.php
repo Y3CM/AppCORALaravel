@@ -27,9 +27,9 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $unverifiedPostsCount = Post::where('is_published', false)->count();
+       /*  $unverifiedPostsCount = Post::where('is_published', false)->count();
 
-        View::share('unverifiedPostsCount', $unverifiedPostsCount);
+        View::share('unverifiedPostsCount', $unverifiedPostsCount); */
         
     }
 }

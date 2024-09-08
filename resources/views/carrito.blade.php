@@ -51,7 +51,8 @@
                         </div>
                         <div class="col-sm-4">
                             @auth
-                                <a href="/comprar" class="btn btn-outline-info">Comprar ahora</a>
+                                <a href="{{route('paypal')}}" class="btn btn-outline-primary">PayPal</a>
+                                <a href="{{route('mercadoPago')}}" class="btn btn-outline-info">Mercado Pago</a>
                                 @else
                                  <a href="{{ route('login') }}" class="btn btn-info">Inicia sesión</a> 
                             @endauth

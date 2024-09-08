@@ -49,7 +49,7 @@ class PaypalController extends Controller
                 [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => $order->total,
+                        "value" => number_format($order->total, 2, '.', ''),
                     ]
                 ]
             ]
@@ -63,11 +63,50 @@ class PaypalController extends Controller
     }
     
 
-    public function getPaymentStatus(Request $request)
-    {
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $provider->setAccessToken($provider->getAccessToken());
+  public function getPaymentStatus(Request $request)
+{
+    // Obtén los datos de la URL (token y PayerID son claves para capturar el pago)
+    $token = $request->query('token');
+    $payerId = $request->query('PayerID');
+    $orderId = $request->query('order_id');
+
+    // Verifica que los parámetros necesarios estén presentes
+    if (!$token || !$payerId || !$orderId) {
+        return redirect('/')->with('error', 'Faltan datos en la respuesta de PayPal.');
     }
+
+    // Buscar la orden en la base de datos por el ID
+    $order = Order::find($orderId);
+    if (!$order) {
+        return redirect('/')->with('error', 'Orden no encontrada.');
+    }
+
+    // Configura el proveedor de PayPal
+    $provider = new PayPalClient;
+    $provider->setApiCredentials(config('paypal'));
+    $provider->setAccessToken($provider->getAccessToken());
+
+    // Intentar capturar el pago con el token proporcionado
+    try {
+        $response = $provider->capturePaymentOrder($token);
+
+        // Verifica el estado de la respuesta de PayPal
+        if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            // Actualiza el estado del pago en la base de datos
+            $order->payment_status = 'completed';
+            $order->save();
+
+            // Redirigir al usuario con un mensaje de éxito
+            return redirect('/')->with('success', 'Pago completado exitosamente.');
+        } else {
+            // Si el pago no fue completado
+            return redirect('/')->with('error', 'No se pudo completar el pago. Inténtalo nuevamente.');
+        }
+    } catch (\Exception $e) {
+        // Si hay un error en el proceso de captura del pago
+        return redirect('/')->with('error', 'Ocurrió un error al procesar el pago: ' . $e->getMessage());
+    }
+}
+
     
 }

@@ -82,6 +82,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('product/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
+    Route::get('/checkout', function () {
+    return view('pagos.paypal');
+    })->name('checkout');
+    
 });
 
 require __DIR__.'/auth.php';

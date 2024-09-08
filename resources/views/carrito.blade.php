@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-sm-4">
                             @auth
-                                <a href="/comprar" class="btn btn-outline-info">Comprar ahora</a>
+                                <a href="{{route('checkout')}}" class="btn btn-outline-info">Comprar ahora</a>
                                 @else
                                  <a href="{{ route('login') }}" class="btn btn-info">Inicia sesión</a> 
                             @endauth

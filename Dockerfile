@@ -2,7 +2,7 @@ FROM php:8.2-apache
 
 # Actualizar repositorios e instalar dependencias necesarias
 RUN apt-get update && apt-get install -y \
-    libonig-dev \  # Aquí se añade la instalación de Oniguruma
+    libonig-dev \
     libzip-dev \
     unzip \
     libpng-dev \

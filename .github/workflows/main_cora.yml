@@ -26,11 +26,11 @@ jobs:
 
       # Step 3: Build Docker image from Dockerfile
       - name: Build Docker image
-        run: docker build -t your-dockerhub-username/cora-app:latest .
+        run: docker build -t yecm/cora-app:latest .
 
       # Step 4: Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
-        run: docker push your-dockerhub-username/cora-app:latest
+        run: docker push yecm/cora-app:latest
 
   deploy:
     runs-on: ubuntu-latest

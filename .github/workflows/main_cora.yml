@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy PHP app to Azure Web App - cora
+name: Build and deploy PHP app to Azure Web App - cora using Docker
 
 on:
   push:
@@ -14,58 +14,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code from repository
       - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      # Step 2: Log in to Docker Hub (or Azure Container Registry if needed)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          php-version: '8.2'
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Check if composer.json exists
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: 'composer.json'
+      # Step 3: Build Docker image from Dockerfile
+      - name: Build Docker image
+        run: docker build -t your-dockerhub-username/cora-app:latest .
 
-      - name: Run composer install if composer.json exists
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
-
-      - name: Install NPM dependencies and build assets
-        run: |
-          npm install
-          
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: php-app
-          path: release.zip
+      # Step 4: Push Docker image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: docker push your-dockerhub-username/cora-app:latest
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: php-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-
-      - name: 'Deploy to Azure Web App'
+      # Step 5: Deploy the Docker image to Azure Web App
+      - name: 'Deploy to Azure Web App using Docker'
         uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
         with:
           app-name: 'cora'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FC5A83F3B5AE4483B3769C088176AC18 }}
-          package: .
+          images: 'yecm/cora-app:latest'

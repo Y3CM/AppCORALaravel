@@ -10,14 +10,9 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     git \
     libbc-math-dev \
-    docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql zip mbstring bcmath
-
-# Instalar extensiones PHP
-RUN docker-php-ext-install gd pdo pdo_mysql zip mbstring
-
-# Limpiar la caché de apt-get para reducir el tamaño de la imagen
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo pdo_mysql zip mbstring bcmath \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copiar aplicación Laravel
 COPY . /var/www/html

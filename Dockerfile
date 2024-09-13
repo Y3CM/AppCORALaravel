@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libfreetype6-dev \
     git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg
+    libbc-math-dev \
+    docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo pdo_mysql zip mbstring bcmath
 
 # Instalar extensiones PHP
 RUN docker-php-ext-install gd pdo pdo_mysql zip mbstring
